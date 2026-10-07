@@ -3,19 +3,20 @@ const sideMenu = document.getElementById('sideMenu');
 const overlay = document.getElementById('overlay');
 const exploreBtn = document.getElementById('exploreBtn');
 const craftonkIdBtnHero = document.getElementById('craftonkIdBtnHero');
-const menuLinks = document.querySelectorAll('.menu-link');
 
 function closeMenu() {
+    if (!sideMenu) return;
     sideMenu.classList.remove('open');
-    overlay.classList.remove('active');
-    menuToggle.classList.remove('menu-open');
+    if (overlay) overlay.classList.remove('active');
+    if (menuToggle) menuToggle.classList.remove('menu-open');
     document.body.style.overflow = '';
 }
 
 function openMenu() {
+    if (!sideMenu) return;
     sideMenu.classList.add('open');
-    overlay.classList.add('active');
-    menuToggle.classList.add('menu-open');
+    if (overlay) overlay.classList.add('active');
+    if (menuToggle) menuToggle.classList.add('menu-open');
     document.body.style.overflow = 'hidden';
 }
 
@@ -33,19 +34,6 @@ if (menuToggle) {
 if (overlay) {
     overlay.addEventListener('click', closeMenu);
 }
-
-menuLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (href && href !== '#') {
-            e.preventDefault();
-            closeMenu();
-            setTimeout(() => {
-                window.location.href = href;
-            }, 200);
-        }
-    });
-});
 
 if (exploreBtn) {
     exploreBtn.addEventListener('click', () => {
